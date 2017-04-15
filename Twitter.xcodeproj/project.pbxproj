@@ -13,8 +13,10 @@
 		F70C2EA61E9EFC1700AC2A75 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F70C2EA41E9EFC1700AC2A75 /* LaunchScreen.storyboard */; };
 		F70C2EAE1E9EFF1C00AC2A75 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70C2EAD1E9EFF1C00AC2A75 /* HomeController.swift */; };
 		F70C2EB01E9F0BD600AC2A75 /* HomeDataSourceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70C2EAF1E9F0BD600AC2A75 /* HomeDataSourceController.swift */; };
-		F70C2EB51E9F167F00AC2A75 /* Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70C2EB41E9F167F00AC2A75 /* Cells.swift */; };
+		F70C2EB51E9F167F00AC2A75 /* UserHeaderFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70C2EB41E9F167F00AC2A75 /* UserHeaderFooter.swift */; };
 		F70C2EB71E9F16B200AC2A75 /* HomeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70C2EB61E9F16B200AC2A75 /* HomeDataSource.swift */; };
+		F77804591EA29E3D00E1993A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77804581EA29E3D00E1993A /* User.swift */; };
+		F778045B1EA2A2FA00E1993A /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F778045A1EA2A2FA00E1993A /* UserCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,8 +30,10 @@
 		F70C2EA71E9EFC1700AC2A75 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F70C2EAD1E9EFF1C00AC2A75 /* HomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		F70C2EAF1E9F0BD600AC2A75 /* HomeDataSourceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeDataSourceController.swift; sourceTree = "<group>"; };
-		F70C2EB41E9F167F00AC2A75 /* Cells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cells.swift; sourceTree = "<group>"; };
+		F70C2EB41E9F167F00AC2A75 /* UserHeaderFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserHeaderFooter.swift; sourceTree = "<group>"; };
 		F70C2EB61E9F16B200AC2A75 /* HomeDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeDataSource.swift; sourceTree = "<group>"; };
+		F77804581EA29E3D00E1993A /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		F778045A1EA2A2FA00E1993A /* UserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				F70C2EB61E9F16B200AC2A75 /* HomeDataSource.swift */,
+				F77804581EA29E3D00E1993A /* User.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -113,7 +118,8 @@
 		F70C2EB31E9F166100AC2A75 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				F70C2EB41E9F167F00AC2A75 /* Cells.swift */,
+				F70C2EB41E9F167F00AC2A75 /* UserHeaderFooter.swift */,
+				F778045A1EA2A2FA00E1993A /* UserCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -243,9 +249,11 @@
 			files = (
 				F70C2EB71E9F16B200AC2A75 /* HomeDataSource.swift in Sources */,
 				F70C2EB01E9F0BD600AC2A75 /* HomeDataSourceController.swift in Sources */,
-				F70C2EB51E9F167F00AC2A75 /* Cells.swift in Sources */,
+				F77804591EA29E3D00E1993A /* User.swift in Sources */,
+				F70C2EB51E9F167F00AC2A75 /* UserHeaderFooter.swift in Sources */,
 				F70C2E9C1E9EFC1700AC2A75 /* AppDelegate.swift in Sources */,
 				F70C2EAE1E9EFF1C00AC2A75 /* HomeController.swift in Sources */,
+				F778045B1EA2A2FA00E1993A /* UserCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
