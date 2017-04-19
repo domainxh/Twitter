@@ -18,16 +18,33 @@ class HomeDataSource: Datasource {
         return [brianUser, rayUser, kindleCoursePromotion]
     }()
     
+    let tweets: [Tweet] = {
+        let brianUser = User(name: "Brian", username: "@letsbuildthatapp", bioText: "Some more bio text", profileImage: #imageLiteral(resourceName: "profile"))
+        let rayUser = User(name: "Ray", username: "@rwenderlich", bioText: "Ray Wenderlich is an iPhone developer and tweets on topics related to iPhone, software, and gaming. Check out our conference.", profileImage: #imageLiteral(resourceName: "profile2"))
+        
+        let tweet = Tweet(user: brianUser, message: "welcome to episode 9 of twiter series, really hope you can learn alot and enjoy my teaching style. I apprecite you what else am i going to write what the fuck. tomorrow i'm going to wake and be a better and smarter person.")
+        let tweet2 = Tweet(user: rayUser, message: "welcome to episode 9 of twiter series, really hope you can learn alot and enjoy my teaching style. I apprecite you what else am i going to write what the fuck. tomorrow i'm going to wake and be a better and smarter person.")
+        
+        return [tweet, tweet2]
+    }()
+    
     override func item(_ indexPath: IndexPath) -> Any? {
+        if  indexPath.section == 1 {
+            return tweets[indexPath.item]
+        }
+        
         return users[indexPath.item]
     }
     
     override func numberOfItems(_ section: Int) -> Int {
+        if section == 1 {
+            return tweets.count
+        }
         return users.count
     }
     
     override func cellClasses() -> [DatasourceCell.Type] {
-        return [UserCell.self]
+        return [UserCell.self, TweetCell.self]
     }
     
     override func headerClasses() -> [DatasourceCell.Type]? {
