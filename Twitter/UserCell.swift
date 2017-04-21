@@ -38,6 +38,7 @@ class UserCell: DatasourceCell {
     let bioTextView: UITextView = {
         let text = UITextView()
         text.backgroundColor = .clear
+        text.isEditable = false
         text.text = "iPhone, iPad, iOS, programming community. Join us to learn Swift, Objective-C, and build iOS aps!"
         text.font = UIFont.boldSystemFont(ofSize: 13)
         return text

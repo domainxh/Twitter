@@ -34,6 +34,7 @@ class TweetCell: DatasourceCell {
         let text = UITextView()
         text.font = UIFont.boldSystemFont(ofSize: 14)
         text.text = "Some sample txt"
+        text.isEditable = false
         return text
     }()
     
