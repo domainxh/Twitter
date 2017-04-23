@@ -7,16 +7,32 @@
 //
 
 import LBTAComponents
+import TRON
+import SwiftyJSON
 
-class HomeDataSource: Datasource {
+class HomeDataSource: Datasource, JSONDecodable {
     
-    let users: [User] = {
-        let brianUser = User(name: "Brian", username: "@letsbuildthatapp", bioText: "Some more bio text", profileImage: #imageLiteral(resourceName: "profile"))
-        let rayUser = User(name: "Ray", username: "@rwenderlich", bioText: "Ray Wenderlich is an iPhone developer and tweets on topics related to iPhone, software, and gaming. Check out our conference.", profileImage: #imageLiteral(resourceName: "profile2"))
-        let kindleCoursePromotion = User(name: "Kindle Course", username: "@kindlecourse", bioText: "This is a long message trying to figure out if the view will display correctly when the biotext is really long. I thoroughly enjoylasjdf;laijsd;ijfa;lks ijf;kdifj aksf;ijas;df lajsdli ja;sdjf ;lasjf ;lasjdf;ija s;dlkjf;a lsdjfli jas;ldfj ;aldsjf idjjasd;lkfja  a;lkdjf;lasjdfjasjf  ;alkdfj ;aslkdjfj faksdj faldjf asdfj aksdfj a;sldkfj akds ksjfkajd", profileImage: #imageLiteral(resourceName: "profile"))
+    let users: [User]
+    required init(json: JSON) throws {
+        print("now ready to parse json: \n", json)
         
-        return [brianUser, rayUser, kindleCoursePromotion]
-    }()
+        var users = [User]()
+        let array = json["users"].array
+        
+        for userJson in array! {
+            let name = userJson["name"].stringValue
+            let username = userJson["username"].stringValue
+            let bioText = userJson["bio"].stringValue
+            let profileImageURL = URL(string: userJson["profileImageUrl"].stringValue)
+            let data = NSData(contentsOf: profileImageURL!)
+            let profileImage = UIImage(data: data as! Data)
+            
+            let user = User(name: name, username: username, bioText: bioText, profileImage: profileImage!)
+            users.append(user)
+        }
+        
+        self.users = users
+    }
     
     let tweets: [Tweet] = {
         let brianUser = User(name: "Brian", username: "@letsbuildthatapp", bioText: "Some more bio text", profileImage: #imageLiteral(resourceName: "profile"))

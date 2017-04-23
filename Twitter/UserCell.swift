@@ -41,6 +41,7 @@ class UserCell: DatasourceCell {
         text.isEditable = false
         text.text = "iPhone, iPad, iOS, programming community. Join us to learn Swift, Objective-C, and build iOS aps!"
         text.font = UIFont.boldSystemFont(ofSize: 13)
+        text.isScrollEnabled = false
         return text
     }()
     

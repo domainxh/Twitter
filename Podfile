@@ -8,5 +8,5 @@ target 'Twitter' do
   # Pods for Twitter
 
 	pod ‘LBTAComponents’, ‘~> 0.1.9’
-
+        pod 'TRON', '~> 3.0'
 end
