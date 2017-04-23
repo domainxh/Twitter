@@ -23,7 +23,7 @@ class HomeDataSource: Datasource {
         let rayUser = User(name: "Ray", username: "@rwenderlich", bioText: "Ray Wenderlich is an iPhone developer and tweets on topics related to iPhone, software, and gaming. Check out our conference.", profileImage: #imageLiteral(resourceName: "profile2"))
         
         let tweet = Tweet(user: brianUser, message: "welcome to episode 9 of twiter series, really hope you can learn alot and enjoy my teaching style. I apprecite you what else am i going to write what the fuck. tomorrow i'm going to wake and be a better and smarter person.")
-        let tweet2 = Tweet(user: rayUser, message: "welcome to episode 9 of twiter series, really hope you can learn alot and enjoy my teaching style. I apprecite you what else am i going to write what the fuck. tomorrow i'm going to wake and be a better and smarter person.")
+        let tweet2 = Tweet(user: rayUser, message: "Google is an American multinational technology company specializing in Internet-related services and products. These include online advertising technologies, search, cloud computing, software, and hardware. Google was founded in 1996 by Larry Page and Sergey Brin while they were Ph.D. students at Stanford University, in California. Together, they own about 14 percent of its shares, and control 56 percent of the stockholder voting power through supervoting stock. They incorporated Google as a privately held company on September 4, 1998. An initial public offering (IPO) took place on August 19, 2004, and Google moved to its new headquarters in Mountain View, California, nicknamed the Googleplex. ")
         
         return [tweet, tweet2]
     }()
