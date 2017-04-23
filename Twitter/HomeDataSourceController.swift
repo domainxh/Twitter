@@ -12,60 +12,14 @@ import SwiftyJSON
 
 class HomeDataSourceController: DatasourceController {
     
-    let tron = TRON(baseURL: "http://api.letsbuildthatapp.com/")
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView?.backgroundColor = UIColor(r: 232, g: 236, b: 241)
         
         setupNavigationBarItems()
         
-//        let homeDataSource = HomeDataSource()
-//        self.datasource = homeDataSource
-        
-        fetchHomeFeed()
-
-    }
-    
-    class Home: JSONDecodable {
-        
-        let users: [User]
-        
-        required init(json: JSON) throws {
-            print("now ready to parse json: \n", json)
-            
-            var users = [User]()
-            let array = json["users"].array
-            
-            for userJson in array! {
-                let name = userJson["name"].stringValue
-                let username = userJson["username"].stringValue
-                let bioText = userJson["bio"].stringValue
-                
-                let user = User(name: name, username: username, bioText: bioText, profileImage: UIImage())
-                users.append(user)
-            }
-            
-            self.users = users
-        }
-    }
-    
-    class JSONError: JSONDecodable {
-        required init(json: JSON) throws {
-            print("Json Error")
-        }
-    }
-    
-    fileprivate func fetchHomeFeed() {
-        // This is alot of code to do it without TRON
-        // URLSession.shared.dataTask(with: <#T##URL#>, completionHandler: <#T##(Data?, URLResponse?, Error?) -> Void#>)
-        
-        let request: APIRequest<HomeDataSource, JSONError> = tron.request("twitter/home")
-        request.perform(withSuccess: { (homeDataSource) in
-            print("Successfuly fetch JSON")
+        Service.sharedInstance.fetchHomeFeed { (homeDataSource) in
             self.datasource = homeDataSource
-        }) { (err) in
-            print("Failed to fetch json: ", err)
         }
     }
     
@@ -77,7 +31,7 @@ class HomeDataSourceController: DatasourceController {
             let approximateWidthOfBioTextView = view.frame.width - 12 - 50 - 12 - 2
             let size = CGSize(width: approximateWidthOfBioTextView, height: 1000)
             let attribute = [NSFontAttributeName: UIFont.systemFont(ofSize: 15)]
-            let estimatedFrame = NSString(string: user.bioText).boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: attribute, context: nil)
+            let estimatedFrame = NSString(string: user.bio).boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: attribute, context: nil)
             
             return CGSize(width: view.frame.width, height: estimatedFrame.height + 66)
         }

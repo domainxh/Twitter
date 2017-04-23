@@ -15,7 +15,7 @@ class UserCell: DatasourceCell {
             guard let user = datasourceItem as? User else { return }
             nameLabel.text = user.name
             userName.text = user.username
-            bioTextView.text = user.bioText
+            bioTextView.text = user.bio
             profileImageView.image = user.profileImage
         }
     }
