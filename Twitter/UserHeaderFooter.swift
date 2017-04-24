@@ -51,10 +51,7 @@ class UserFooter: DatasourceCell {
         
         separatorLineView.isHidden = false
         separatorLineView.backgroundColor = UIColor(r: 230, g: 230, b: 230)
-        
-//        let whiteBackground = UIView()
-//        whiteBackground.backgroundColor = .white
-        
+
         addSubview(whiteBackground)
         addSubview(textLabel)
         

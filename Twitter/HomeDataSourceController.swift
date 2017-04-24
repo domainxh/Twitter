@@ -12,14 +12,28 @@ import SwiftyJSON
 
 class HomeDataSourceController: DatasourceController {
     
+    let errorMessageLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Apologies, something went wrong. Please try again later..."
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        return label
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         collectionView?.backgroundColor = UIColor(r: 232, g: 236, b: 241)
         
         setupNavigationBarItems()
         
-        Service.sharedInstance.fetchHomeFeed { (homeDataSource) in
+        Service.sharedInstance.fetchHomeFeed { (homeDataSource, error) in
             self.datasource = homeDataSource
+            
+            if let error = error {
+                view.addSubview(errorMessageLabel)
+                errorMessageLabel.fillSuperview()
+            }
         }
     }
     
@@ -45,17 +59,13 @@ class HomeDataSourceController: DatasourceController {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         
-        if section == 1 {
-            return .zero
-        }
+        if section == 1 { return .zero }
         return CGSize(width: view.frame.width, height: 50)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
 
-        if section == 1 {
-            return .zero
-        }
+        if section == 1 { return .zero }
         return CGSize(width: view.frame.width, height: 64)
     }
     

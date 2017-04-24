@@ -24,17 +24,12 @@ class HomeDataSource: Datasource, JSONDecodable {
     }
     
     override func item(_ indexPath: IndexPath) -> Any? {
-        if  indexPath.section == 1 {
-            return tweets[indexPath.item]
-        }
-        
+        if indexPath.section == 1 { return tweets[indexPath.item] }
         return users[indexPath.item]
     }
     
     override func numberOfItems(_ section: Int) -> Int {
-        if section == 1 {
-            return tweets.count
-        }
+        if section == 1 { return tweets.count }
         return users.count
     }
     
