@@ -10,6 +10,15 @@ import LBTAComponents
 import TRON
 import SwiftyJSON
 
+extension Collection where Iterator.Element == JSON {
+    // By putting the <T>, you're specifying that if your input is of type T, your return will be of type T so you eliminate the needs to write self.users = usersJsonArray.decode() as! [User]
+//    func decdoe() -> [] {
+    
+    func decode<T: JSONDecodable>() throws -> [T] {
+        return try map{try T(json: $0)}
+    }
+}
+
 class HomeDataSource: Datasource, JSONDecodable {
     
     let users: [User]
@@ -20,8 +29,11 @@ class HomeDataSource: Datasource, JSONDecodable {
             throw NSError(domain: "com.letsbuildthatapp", code: 1, userInfo: [NSLocalizedDescriptionKey: "'users' or 'tweets' not available in json"])
         }
         
-        self.users = usersJsonArray.map{ User(json: $0) }
-        self.tweets = tweetJsonArray.map{ Tweet(json: $0) }
+//        self.users = usersJsonArray.map{ User(json: $0) }
+//        self.tweets = tweetJsonArray.map{ Tweet(json: $0) }
+        
+        self.users = try usersJsonArray.decode()
+        self.tweets = try tweetJsonArray.decode()
     }
     
     override func item(_ indexPath: IndexPath) -> Any? {
@@ -44,5 +56,9 @@ class HomeDataSource: Datasource, JSONDecodable {
     
     override func footerClasses() -> [DatasourceCell.Type]? {
         return [UserFooter.self]
+    }
+    
+    override func numberOfSections() -> Int {
+        return 2
     }
 }

@@ -15,8 +15,8 @@ class UserCell: DatasourceCell {
             guard let user = datasourceItem as? User else { return }
             nameLabel.text = user.name
             userName.text = user.username
-            bioTextView.text = user.bio
-            profileImageView.image = user.profileImage
+            bioTextView.text = user.bio            
+            profileImageView.loadImage(urlString: user.profileImageUrl)
         }
     }
     
@@ -40,13 +40,13 @@ class UserCell: DatasourceCell {
         text.backgroundColor = .clear
         text.isEditable = false
         text.text = "iPhone, iPad, iOS, programming community. Join us to learn Swift, Objective-C, and build iOS aps!"
-        text.font = UIFont.boldSystemFont(ofSize: 13)
+        text.font = UIFont.boldSystemFont(ofSize: 15)
         text.isScrollEnabled = false
         return text
     }()
     
-    let profileImageView: UIImageView = {
-        let imageView = UIImageView()
+    let profileImageView: CachedImageView = {
+        let imageView = CachedImageView()
         imageView.image = #imageLiteral(resourceName: "profile")
         imageView.layer.cornerRadius = 5
         imageView.clipsToBounds = true
@@ -85,7 +85,7 @@ class UserCell: DatasourceCell {
         nameLabel.anchor(profileImageView.topAnchor, left: profileImageView.rightAnchor, bottom: nil, right: followButton.leftAnchor, topConstant: 0, leftConstant: 8, bottomConstant: 0, rightConstant: 8, widthConstant: 0, heightConstant: 20)
         userName.anchor(nameLabel.bottomAnchor, left: profileImageView.rightAnchor, bottom: nil, right: followButton.leftAnchor, topConstant: 0, leftConstant: 8, bottomConstant: 0, rightConstant: 8, widthConstant: 0, heightConstant: 20)
         followButton.anchor(topAnchor, left: nil, bottom: nil, right: self.rightAnchor, topConstant: 12, leftConstant: 0, bottomConstant: 0, rightConstant: 12, widthConstant: 120, heightConstant: 40)
-        bioTextView.anchor(userName.bottomAnchor, left: userName.leftAnchor, bottom: self.bottomAnchor, right: self.rightAnchor, topConstant: -4, leftConstant: -4, bottomConstant: 12, rightConstant: 12, widthConstant: 0, heightConstant: 0)
+        bioTextView.anchor(userName.bottomAnchor, left: userName.leftAnchor, bottom: self.bottomAnchor, right: self.rightAnchor, topConstant: -4, leftConstant: -4, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
     }
 }

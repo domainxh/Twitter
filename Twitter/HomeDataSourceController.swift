@@ -47,15 +47,17 @@ class HomeDataSourceController: DatasourceController {
     
     override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        if let user = self.datasource?.item(indexPath) as? User {
-
-            // get estimation for height of cell based off bioText content.
-            let approximateWidthOfBioTextView = view.frame.width - 12 - 50 - 12 - 2
-            let size = CGSize(width: approximateWidthOfBioTextView, height: 1000)
-            let attribute = [NSFontAttributeName: UIFont.systemFont(ofSize: 15)]
-            let estimatedFrame = NSString(string: user.bio).boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: attribute, context: nil)
+        if indexPath.section == 0 {
+            guard let user = self.datasource?.item(indexPath) as? User else { return .zero}
+            let estimatedHeight = estimateHeightForText(TextString: user.bio)
+    
+            return CGSize(width: view.frame.width, height: estimatedHeight + 66)
             
-            return CGSize(width: view.frame.width, height: estimatedFrame.height + 66)
+        } else if indexPath.section == 1 {
+            guard let tweet = self.datasource?.item(indexPath) as? Tweet else { return .zero }
+            let estimatedHeight = estimateHeightForText(TextString: tweet.message)
+            
+            return CGSize(width: view.frame.width, height: estimatedHeight + 74)
         }
         
         return CGSize(width: view.frame.width, height: 200)
@@ -63,6 +65,15 @@ class HomeDataSourceController: DatasourceController {
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 2
+    }
+    
+    private func estimateHeightForText(TextString: String) -> CGFloat {
+        let approximateWidthOfBioTextView = view.frame.width - 12 - 50 - 12 - 2
+        let size = CGSize(width: approximateWidthOfBioTextView, height: 1000)
+        let attribute = [NSFontAttributeName: UIFont.systemFont(ofSize: 15)]
+        let estimatedFrame = NSString(string: TextString).boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: attribute, context: nil)
+        
+        return estimatedFrame.height
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {

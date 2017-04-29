@@ -8,23 +8,18 @@
 
 import UIKit
 import SwiftyJSON
+import TRON
 
-struct User {
+struct User: JSONDecodable {
     let name: String
     let username: String
     let bio: String
-    let profileImage: UIImage
+    let profileImageUrl: String
     
     init(json: JSON) {
         self.name = json["name"].stringValue
         self.username = json["username"].stringValue
         self.bio = json["bio"].stringValue
-        let profileImageURL = URL(string: json["profileImageUrl"].stringValue)
-//        if let data = NSData(contentsOf: profileImageURL!) {
-//            self.profileImage = UIImage(data: data as Data)!
-//        } else {
-            self.profileImage = UIImage()
-//        }
-
+        self.profileImageUrl = json["profileImageUrl"].stringValue
     }
 }
