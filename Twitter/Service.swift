@@ -15,17 +15,19 @@ struct Service {
     let tron = TRON(baseURL: "https://api.letsbuildthatapp.com/")
     static let sharedInstance = Service()
     
-    func fetchHomeFeed(completion: @escaping (HomeDataSource, Error) -> ()) {
+    func fetchHomeFeed(completion: @escaping (HomeDataSource?, Error?) -> ()) {
         print("Fetching home feed")
         
-        let request: APIRequest<HomeDataSource, JSONError> = tron.request("twitter/home")
+        let request: APIRequest<HomeDataSource, JSONError> = tron.request("twitter/home1")
         request.perform(withSuccess: { (homeDataSource) in
-            print("Successfuly fetch JSON")
-
-            completion(homeDataSource, error)
+            completion(homeDataSource, nil)
             
         }) { (err) in
-            print("Failed to fetch json: ", err)
+            
+            let err = err as? APIError<JSONError>
+            err?.response?.statusCode
+            
+            completion(nil, err)
         
         }
     }

@@ -28,12 +28,20 @@ class HomeDataSourceController: DatasourceController {
         setupNavigationBarItems()
         
         Service.sharedInstance.fetchHomeFeed { (homeDataSource, error) in
-            self.datasource = homeDataSource
             
             if let error = error {
-                view.addSubview(errorMessageLabel)
-                errorMessageLabel.fillSuperview()
+                if let apiError = error as? APIError<Service.JSONError> {
+                    if apiError.response?.statusCode != 200 {
+                        self.errorMessageLabel.text = "Status code was not 200"
+                    }
+                }
+                
+                self.view.addSubview(self.errorMessageLabel)
+                self.errorMessageLabel.fillSuperview()
+                return
             }
+            
+            self.datasource = homeDataSource
         }
     }
     

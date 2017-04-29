@@ -16,11 +16,12 @@ class HomeDataSource: Datasource, JSONDecodable {
     let tweets: [Tweet]
     
     required init(json: JSON) throws {
-        let usersJsonArray = json["users"].array
-        let tweetJsonArray = json["tweets"].array
+        guard let usersJsonArray = json["users"].array, let tweetJsonArray = json["tweets"].array else {
+            throw NSError(domain: "com.letsbuildthatapp", code: 1, userInfo: [NSLocalizedDescriptionKey: "'users' or 'tweets' not available in json"])
+        }
         
-        self.users = usersJsonArray!.map{ User(json: $0) }
-        self.tweets = tweetJsonArray!.map{ Tweet(json: $0) }
+        self.users = usersJsonArray.map{ User(json: $0) }
+        self.tweets = tweetJsonArray.map{ Tweet(json: $0) }
     }
     
     override func item(_ indexPath: IndexPath) -> Any? {
